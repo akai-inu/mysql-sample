@@ -1,0 +1,9 @@
+{
+    "name": "akai_inu/mysql-sample",
+    "type": "project",
+    "require": {
+        "fzaninotto/faker": "^1.7",
+        "catfan/Medoo": "^1.4"
+    },
+    "license": "MIT"
+}
