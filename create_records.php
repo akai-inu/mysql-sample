@@ -4,8 +4,7 @@ function get_datetime_list($faker)
 {
     $created_at = $faker->dateTimeBetween('-1 years')->format('Y-m-d H:i:s');
     $updated_at = $faker->dateTimeBetween($created_at)->format('Y-m-d H:i:s');
-    $deleted_at = ($faker->boolean(10) ? $updated_at : null);
-    return compact('created_at', 'updated_at', 'deleted_at');
+    return compact('created_at', 'updated_at');
 }
 
 function create_records($dba, $user_count = 500000, $card_count = 300)
@@ -21,7 +20,6 @@ function create_records($dba, $user_count = 500000, $card_count = 300)
             'type' => $faker->numberBetween(0, 10),
             'rarity' => $faker->numberBetween(1, 5),
             'name' => $faker->word,
-            'max_level' => 99,
             'description' => $faker->text(256),
         ]);
     }
@@ -61,6 +59,7 @@ function create_records($dba, $user_count = 500000, $card_count = 300)
     for ($i = 0; $i < $user_count; $i++) {
         $buffer->push(array_merge([
             'id' => $i + 1,
+            'state' => ($faker->boolean(10) ? 1 : 0),
             'name' => $faker->word,
             'level' => $faker->numberBetween(1, 255),
         ], get_datetime_list($faker)));
@@ -78,6 +77,7 @@ function create_records($dba, $user_count = 500000, $card_count = 300)
     for ($i = 0; $i < $user_count; $i++) {
         for ($j = 0; $j < $faker->numberBetween(10, 500); $j++) {
             $buffer->push(array_merge([
+                'state' => $faker->numberBetween(0, 2),
                 'user_id' => $i + 1,
                 'card_id' => $faker->numberBetween(1, $card_count - 1),
                 'level' => $faker->numberBetween(1, 99),

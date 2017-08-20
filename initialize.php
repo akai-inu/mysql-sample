@@ -14,5 +14,5 @@ $dba = new Medoo\Medoo([
 ]);
 
 create_table($dba);
-create_records($dba, 100);
+create_records($dba, 10000);
 echo PHP_EOL;
