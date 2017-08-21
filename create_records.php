@@ -79,7 +79,7 @@ function create_records($dba, $user_count = 500000, $card_count = 300)
             $buffer->push(array_merge([
                 'state' => $faker->numberBetween(0, 2),
                 'user_id' => $i + 1,
-                'card_id' => $faker->numberBetween(1, $card_count - 1),
+                'card_model_id' => $faker->numberBetween(1, $card_count - 1),
                 'level' => $faker->numberBetween(1, 99),
             ], get_datetime_list($faker)));
         }

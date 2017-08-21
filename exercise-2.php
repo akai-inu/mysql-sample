@@ -9,15 +9,19 @@ $dba = new Medoo\Medoo([
     'password' => getenv('PASSWORD')
 ]);
 
-// ユーザのカード一覧を取得する
+// ユーザのカード詳細一覧を取得する
 $query = <<<'QUERY'
 SELECT SQL_NO_CACHE
     *
 FROM
-    `user_cards`
+    user_cards AS uc
+INNER JOIN
+    card_models AS cm ON cm.id = uc.card_model_id
+INNER JOIN
+    cards AS c ON c.card_model_id = cm.id AND c.level = uc.level
 WHERE
-    `user_id` = :userid
-    AND `state` = :state
+    user_id = :userid
+    AND user_cards.state = :state
 ;
 QUERY;
 $now = microtime(true);

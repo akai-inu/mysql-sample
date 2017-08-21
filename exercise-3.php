@@ -9,19 +9,22 @@ $dba = new Medoo\Medoo([
     'password' => getenv('PASSWORD')
 ]);
 
-// ユーザのカード一覧を取得する
+// ユーザのレベルランキングを取得する
 $query = <<<'QUERY'
 SELECT SQL_NO_CACHE
     *
 FROM
-    `user_cards`
+    `users`
 WHERE
-    `user_id` = :userid
-    AND `state` = :state
+    `state` = :state
+ORDER BY
+    level DESC
+LIMIT
+    100
 ;
 QUERY;
 $now = microtime(true);
-$records = $dba->query($query, [':userid' => 100, ':state' => 0])->fetchAll();
+$records = $dba->query($query, [':state' => 0])->fetchAll();
 $diff = microtime(true) - $now;
 
 printf(

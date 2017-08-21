@@ -21,7 +21,7 @@ EOL
         id bigINT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
         state TINYINT UNSIGNED NOT NULL COMMENT '0=所持中,1=受け取りBOX,2=削除済',
         user_id INT UNSIGNED NOT NULL,
-        card_id INT UNSIGNED NOT NULL,
+        card_model_id INT UNSIGNED NOT NULL,
         level SMALLINT UNSIGNED NOT NULL,
         created_at DATETIME NOT NULL,
         updated_at DATETIME NOT NULL
